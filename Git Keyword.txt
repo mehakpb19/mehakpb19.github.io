@@ -1,0 +1,18 @@
+git init: Creates a new Git repository.
+git add: Stages files for commit.
+git commit: Records changes to the repository.
+git branch: Creates, lists, or deletes branches.
+git checkout: Switches between branches or commits.
+git merge: Integrates changes from one branch into another.
+git push: Uploads local commits to a remote repository.
+git pull: Downloads and integrates changes from a remote repository.
+git clone: Creates a local copy of a remote repository.
+git status: Shows the status of the repository.
+git log: Displays commit history.
+git remote: Manages remote repositories.
+git config: Configures Git settings.
+git fetch: Downloads changes from a remote repository without merging.
+git rebase: Integrates changes from a remote branch into the current branch.
+git reset: Undoes commits or changes.
+git revert: Reverts a commit.
+git clean: Removes untracked files from the working directory. 

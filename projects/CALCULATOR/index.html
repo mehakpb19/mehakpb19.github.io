@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main>
+        <div class="calculator">
+            <input type="text" class="text-feild" maxlength="-1" id="text-feild">
+            <div class="btns">
+                <button class="input-button" onclick="remove()" style="background-color:rgb(136, 136, 136); color: black;" id="ac">AC</button>
+                <button class="input-button" onclick="backspace()" style="background-color:rgb(136, 136, 136); color: black;" id="back"><--</button>
+                <button class="input-button" onclick="add('%')" style="background-color:rgb(136, 136, 136); color: black;" id="%">%</button>
+                <button class="input-button" onclick="add('/')" style="background-color:rgb(255, 153, 0);" id="/">/</button><br>
+                <button class="input-button" onclick="add(7)" id="7">7</button>
+                <button class="input-button" onclick="add(8)" id="8">8</button>
+                <button class="input-button" onclick="add(9)" id="9">9</button>
+                <button class="input-button" onclick="add('*')" style="background-color:rgb(255, 153, 0);" id="X">X</button><br>
+                <button class="input-button" onclick="add(4)" id="4">4</button>
+                <button class="input-button" onclick="add(5)" id="5">5</button>
+                <button class="input-button" onclick="add(6)" id="6">6</button>
+                <button class="input-button" onclick="add('-')" style="background-color:rgb(255, 153, 0);" id="-">-</button><br>
+                <button class="input-button" onclick="add(1)" id="1">1</button>
+                <button class="input-button" onclick="add(2)" id="2">2</button>
+                <button class="input-button" onclick="add(3)" id="3">3</button>
+                <button class="input-button" onclick="add('+')" style="background-color:rgb(255, 153, 0);" id="+">+</button><br>
+                <button class="input-button" onclick="add('00')" id="00">00</button>
+                <button class="input-button" onclick="add(0)" id="0">0</button>
+                <button class="input-button" onclick="add('.')" id=".">.</button>
+                <button class="input-button" onclick="result()" style="background-color:rgb(255, 153, 0);" id="=">=</button>
+
+            </div>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.0/math.min.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>

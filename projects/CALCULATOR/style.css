@@ -1,0 +1,44 @@
+body {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background: #EEAECA;
+    background: radial-gradient(circle, rgb(110, 159, 214) 0%, rgb(223, 174, 128) 100%);
+}
+
+main {
+    background: #000000;
+    border-radius: 10px;
+    padding: 10px;
+    margin: auto;
+}
+
+.text-feild {
+    background-color: black;
+    color: white;
+    font-size: 2em;
+    text-align: right;
+    width: 8.5em;
+}
+
+.input-button {
+    font-weight: 800;
+    margin-block: 6px;
+    font-size: 1em;
+    color: white;
+    border-radius: 10em;
+    width: 4em;
+    border: none;
+    height: 4em;
+    outline: none;
+    background-color: #2d2d2d;
+    outline: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    /* Important to remove the space left by the buttons */
+}

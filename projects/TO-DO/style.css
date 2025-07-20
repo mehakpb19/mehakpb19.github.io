@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Libertinus+Mono&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+body {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    margin: 0;
+    background: #EEAECA;
+    background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+    padding-top: 80px;
+    font-family: "Libertinus Mono", monospace;
+    font-weight: 400;
+    font-style: normal;
+}
+
+main {
+    background: transparent;
+}
+
+label {
+    font-size: 2rem;
+}
+
+.feild {
+    border-radius: 15rem;
+    border: 1px solid #000;
+    background-color: #ffffff;
+    height: 3em;
+    width: 15rem;
+    outline: none;
+    padding-inline: 10px;
+}
+
+.sbtn {
+    height: 3em;
+    border-radius: 15rem;
+    background-color: #c2c2c2;
+    border: none;
+    position: absolute;
+    right: 1px;
+    top: 2px;
+    width: 4em;
+    outline: none;
+}
+
+.todo {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    color: rgb(0, 0, 0);
+}
+
+.list {
+    top: 5rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #0000001d;
+    border-radius: 10px;
+    gap: 1rem;
+}
+
+.item {
+    border-radius: 10px;
+    background: #00000023;
+    height: fit-content;
+    display: flex;
+    height: 2em;
+}
+
+.item input {
+    margin-block: auto;
+    height: fit-content;
+}
+
+.item h4 {
+    font-size: 15px;
+    margin-block: auto;
+}
+
+.item button {
+    background: transparent;
+    border: none;
+    font-size: 10px;
+    outline: none;
+    margin-inline-start: auto;
+}
