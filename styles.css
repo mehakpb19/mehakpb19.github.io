@@ -1,0 +1,110 @@
+body {
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    height: 100vh;
+    /* Full viewport height */
+    margin: 0;
+    /* Background gradient */
+    background: #a200ff;
+    background: linear-gradient(90deg, rgba(162, 0, 255, 0.82) 0%, rgba(250, 45, 45, 0.75) 48%, rgba(235, 255, 13, 0.83) 100%);
+    overflow: hidden;
+    /* Prevent scrolling on the body */
+    font-family: 'Arial', sans-serif;
+    /* A clean font */
+}
+
+main {
+    border-radius: 10px;
+    padding: 20px;
+    /* Increased padding for better spacing */
+    background-color: rgba(255, 255, 255, 0.8);
+    /* Semi-transparent white background */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    /* Soft shadow for depth */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center items horizontally within main */
+    max-height: 90vh;
+    /* Max height to fit within viewport */
+    overflow: hidden;
+    /* Prevent scrolling within main */
+}
+
+.dialogs {
+    font-weight: 900;
+    color: rgb(0, 0, 0);
+    font-size: 1.8em;
+    /* Larger font for better visibility */
+    margin-bottom: 1.8rem;
+    text-align: center;
+    /* Ensure text is centered */
+    min-height: 1.8em;
+    /* Give it a min-height to prevent jumping */
+}
+
+.game {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Creates 3 equal columns */
+    gap: 10px;
+    /* Space between grid items */
+    width: 200px;
+    /* Fixed width for the game board (adjust as needed) */
+    height: 200px;
+    /* Fixed height for the game board (adjust as needed) */
+}
+
+button {
+    height: 60px;
+    /* Fixed height for buttons */
+    width: 60px;
+    /* Fixed width for buttons */
+    font-size: 2.5em;
+    /* Larger font for X/O */
+    font-weight: bold;
+    color: #333;
+    /* Darker text color */
+    background-color: #f0f0f0;
+    /* Light grey background for buttons */
+    border: 2px solid #ccc;
+    /* Subtle border */
+    border-radius: 8px;
+    /* Slightly rounded corners for buttons */
+    outline: none;
+    cursor: pointer;
+    /* Indicates clickable */
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    /* Smooth hover effects */
+    display: flex;
+    /* Use flexbox to center X/O within the button */
+    justify-content: center;
+    align-items: center;
+}
+
+button:hover {
+    background-color: #e0e0e0;
+    /* Slightly darker on hover */
+    transform: translateY(-2px);
+    /* Slight lift on hover */
+}
+
+button:active {
+    transform: translateY(0);
+    /* Press effect */
+}
+
+
+/* Styles for winning cells */
+
+button[style*="background-color: lightgreen"] {
+    background-color: lightgreen !important;
+    /* Override other styles */
+    color: white;
+    /* White text for contrast */
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+    /* Glowing effect */
+}
