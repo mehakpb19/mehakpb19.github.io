@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    background: rgb(59, 59, 59);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+main {
+    display: flex;
+    width: 200vh;
+    height: 15rem;
+    flex-direction: column;
+    margin-top: 10rem;
+}
+
+p {
+    font-size: 2em;
+    font-weight: 700;
+}
+
+button {
+    outline: none;
+    border: none;
+    width: 10em;
+    height: 3em;
+    border-radius: 10px;
+    font-size: 20px;
+}
