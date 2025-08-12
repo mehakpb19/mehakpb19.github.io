@@ -6,17 +6,30 @@ let lastX = 0;
 let lastY = 0;
 
 canvas.addEventListener('mousedown', (e) => {
-    isDrawing = true;
-    [lastX, lastY] = [e.offsetX, e.offsetY];
+    mousedown(e);
+});
+canvas.addEventListener('touchstart', (e) => {
+    mousedown(e);
 });
 
-canvas.addEventListener('mousemove', (e) => {
+function mousedown(e) {
+    isDrawing = true;
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+}
+
+function mousemove(e) {
     if (!isDrawing) return;
     ctx.beginPath();
     ctx.moveTo(lastX, lastY);
     ctx.lineTo(e.offsetX, e.offsetY);
     ctx.stroke();
     [lastX, lastY] = [e.offsetX, e.offsetY];
+}
+canvas.addEventListener('mousemove', (e) => {
+    mousemove(e);
+});
+canvas.addEventListener('touchmove', (e) => {
+    mousemove(e);
 });
 
 canvas.addEventListener('mouseup', () => isDrawing = false);
