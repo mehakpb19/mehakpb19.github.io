@@ -1,0 +1,23 @@
+body {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background: #EEAECA;
+    background: radial-gradient(circle, rgb(110, 159, 214) 0%, rgb(223, 174, 128) 100%);
+}
+
+main {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+    margin: auto;
+    width: auto;
+}
+
+input[type="text"] {
+    font-size: 4rem;
+    width: 7rem;
+    height: 5rem;
+    text-align: right;
+}

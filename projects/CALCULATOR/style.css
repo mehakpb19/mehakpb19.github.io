@@ -35,10 +35,3 @@ main {
     background-color: #2d2d2d;
     outline: none;
 }
-
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-    /* Important to remove the space left by the buttons */
-}
