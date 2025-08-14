@@ -1,0 +1,56 @@
+body {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    margin: 1rem;
+    background: #EEAECA;
+    background: #ff009965;
+}
+
+main {
+    background: #ffffff;
+    border-radius: 10px;
+    margin: auto;
+    width: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cards {
+    border: 1px solid black;
+    margin: 10px;
+}
+
+.card {
+    margin-top: 10px;
+    width: 121px;
+    height: 207px;
+    margin: 0.5rem;
+}
+
+.cardfront,
+.cardback {
+    position: absolute;
+    box-sizing: border-box;
+    transition: transform 0.5s ease;
+}
+
+.cardback.flipped {
+    z-index: 1;
+    transform: perspective(1000px) rotateY(0deg);
+}
+
+.cardback {
+    z-index: -1;
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+.cardfront {
+    transform: perspective(1000px) rotateY(0deg);
+}
+
+.cardfront.flipped {
+    z-index: -1;
+    transform: perspective(1000px) rotateY(-180deg);
+}
