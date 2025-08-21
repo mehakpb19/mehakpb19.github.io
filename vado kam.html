@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #myElement {
+            height: 50px;
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+        <div id="myElement"></div>
+    </div>
+
+    <script>
+        // Store data
+        localStorage.setItem('username', 'JohnDoe');
+        localStorage.setItem('userPreferences', JSON.stringify({
+            theme: 'dark',
+            notifications: true
+        }));
+
+        // Retrieve data
+        const username = localStorage.getItem('username');
+        const userPreferences = JSON.parse(localStorage.getItem('userPreferences'));
+
+        console.log(username); // Output: JohnDoe
+        console.log(userPreferences.theme); // Output: dark
+
+        localStorage.clear();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+.section {
+    display: flex;
+}
+
+#todo {
+    width: 5rem;
+    margin-left: 1rem;
+    display: flex;
+    padding-top: 5px;
+    justify-content: center;
+    height: 12rem;
+    border: 1px dashed black;
+}
+
+#progress {
+    width: 5rem;
+    display: flex;
+    padding-top: 5px;
+    justify-content: center;
+    height: 12rem;
+    border: 1px dashed black;
+}
+
+#done {
+    width: 5rem;
+    display: flex;
+    padding-top: 5px;
+    justify-content: center;
+    height: 12rem;
+    border: 1px dashed black;
+}
+
+#card {
+    border: 1px solid #ff0000;
+    width: 4rem;
+    height: 6rem;
+}
+
+#card2 {
+    border: 1px solid #00ff62;
+    width: 4rem;
+    height: 6rem;
+    position: fixed;
+}

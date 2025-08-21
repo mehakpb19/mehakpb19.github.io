@@ -14,7 +14,6 @@ function update() {
     min.value = nmin;
     sec.value = nsec;
 }
-
 start.addEventListener('click', () => {
     nhour = hours.value;
     nmin = min.value;
@@ -25,9 +24,7 @@ start.addEventListener('click', () => {
             intervalison = true;
             stop.addEventListener('click', () => {
                 intervalison = false;
-
                 clearInterval(secondInterval);
-
             })
             if (nsec > 0) {
                 nsec--;
