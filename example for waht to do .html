@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Visualizer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c;
+            /* Dark background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #e2e8f0;
+            /* Light text */
+        }
+        
+        .container {
+            display: flex;
+            align-items: flex-end;
+            margin-top: 2rem;
+            width: 90%;
+            max-width: 1000px;
+            height: 400px;
+            background-color: #2d3748;
+            /* Darker gray for container */
+            border-radius: 0.75rem;
+            /* Rounded corners */
+            padding: 1rem;
+            gap: 2px;
+            /* Small gap between bars */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .bar {
+            width: 100%;
+            /* Will be overridden by JS */
+            background-color: #63b3ed;
+            /* Blue color */
+            border-radius: 0.25rem 0.25rem 0 0;
+            /* Rounded top corners */
+            transition: height 0.1s ease-in-out, background-color 0.1s ease-in-out, transform 0.1s ease-in-out;
+            flex-grow: 1;
+            /* Allow bars to grow to fill space */
+        }
+        
+        .button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.2s ease-in-out;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin: 0.5rem;
+        }
+        
+        .button-primary {
+            background-color: #4299e1;
+            /* Blue */
+            color: white;
+        }
+        
+        .button-primary:hover {
+            background-color: #3182ce;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px -1px rgba(0, 0, 0, 0.1), 0 3px 5px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .button-secondary {
+            background-color: #a0aec0;
+            /* Gray */
+            color: #2d3748;
+        }
+        
+        .button-secondary:hover {
+            background-color: #718096;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px -1px rgba(0, 0, 0, 0.1), 0 3px 5px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .button:active {
+            transform: translateY(0);
+            box-shadow: none;
+        }
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            /* Allow controls to wrap on smaller screens */
+            justify-content: center;
+            margin-bottom: 2rem;
+            width: 90%;
+            max-width: 1000px;
+        }
+        
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            background: #4a5568;
+            border-radius: 5px;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity .2s;
+            margin: 0.5rem 1rem;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4299e1;
+            cursor: pointer;
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4299e1;
+            cursor: pointer;
+        }
+        
+        .slider-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0.5rem 1rem;
+            min-width: 200px;
+        }
+        
+        .slider-group label {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #cbd5e0;
+        }
+        
+        .info-box {
+            background-color: #2d3748;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #cbd5e0;
+            max-width: 1000px;
+            width: 90%;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
+
+    <h1 class="text-4xl font-bold mb-8 text-blue-400">Sorting Visualizer</h1>
+
+    <div class="controls flex flex-wrap justify-center items-center mb-8 bg-gray-800 p-6 rounded-xl shadow-lg">
+        <button id="generateArray" class="button button-primary">Generate New Array</button>
+        <div class="slider-group">
+            <label for="arraySize">Array Size: <span id="arraySizeValue">50</span></label>
+            <input type="range" id="arraySize" min="5" max="200" value="50">
+        </div>
+        <div class="slider-group">
+            <label for="animationSpeed">Animation Speed: <span id="animationSpeedValue">50</span>ms</label>
+            <input type="range" id="animationSpeed" min="10" max="500" value="50">
+        </div>
+        <button id="startBubbleSort" class="button button-primary">Start Bubble Sort</button>
+        <button id="startQuickSort" class="button button-primary">Start Quick Sort</button>
+    </div>
+
+    <div id="visualizerContainer" class="container">
+        <!-- Bars will be inserted here by JavaScript -->
+    </div>
+
+    <div class="info-box">
+        <p>This is a simple sorting visualizer demonstrating the Bubble Sort and Quick Sort algorithms. You can generate a new array of bars with random heights, adjust the array size and animation speed, and then watch the algorithm sort the bars visually.
+            The blue bars represent unsorted elements. During a swap, they will temporarily turn red and green, and during comparisons or partitioning in Quick Sort, they may turn yellow. Sorted elements will eventually turn green.</p>
+    </div>
+
+    <script>
+        const visualizerContainer = document.getElementById('visualizerContainer');
+        const generateArrayBtn = document.getElementById('generateArray');
+        const startBubbleSortBtn = document.getElementById('startBubbleSort');
+        const startQuickSortBtn = document.getElementById('startQuickSort');
+        const arraySizeSlider = document.getElementById('arraySize');
+        const arraySizeValueSpan = document.getElementById('arraySizeValue');
+        const animationSpeedSlider = document.getElementById('animationSpeed');
+        const animationSpeedValueSpan = document.getElementById('animationSpeedValue');
+
+        let array = [];
+        let numBars = parseInt(arraySizeSlider.value);
+        let animationDelay = parseInt(animationSpeedSlider.value);
+        let isSorting = false; // Flag to prevent multiple sorts simultaneously
+
+        // Function to generate a random array of bars
+        function generateArray() {
+            if (isSorting) return; // Prevent generating new array while sorting
+            visualizerContainer.innerHTML = ''; // Clear previous bars
+            array = [];
+            for (let i = 0; i < numBars; i++) {
+                // Ensure values are suitable for bar height within container limits (min 10px height)
+                const value = Math.floor(Math.random() * (visualizerContainer.offsetHeight - 20)) + 10;
+                array.push(value);
+                const bar = document.createElement('div');
+                bar.classList.add('bar');
+                bar.style.height = `${value}px`;
+                bar.style.width = `${100 / numBars}%`; // Distribute width evenly
+                visualizerContainer.appendChild(bar);
+            }
+        }
+
+        // Helper function to introduce a delay
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Function to swap two bars visually
+        async function swapBars(bar1, bar2) {
+            // Highlight bars being swapped
+            bar1.style.backgroundColor = '#fc8181'; // Red
+            bar2.style.backgroundColor = '#68d391'; // Green
+
+            await sleep(animationDelay); // Wait for a moment
+
+            // Swap heights in the DOM
+            const tempHeight = bar1.style.height;
+            bar1.style.height = bar2.style.height;
+            bar2.style.height = tempHeight;
+
+            await sleep(animationDelay); // Wait for visual transition
+
+            // Reset colors
+            bar1.style.backgroundColor = '#63b3ed'; // Blue
+            bar2.style.backgroundColor = '#63b3ed'; // Blue
+        }
+
+        // Function to reset all bar colors to default blue
+        function resetBarColors() {
+            const bars = document.querySelectorAll('.bar');
+            bars.forEach(bar => {
+                bar.style.backgroundColor = '#63b3ed';
+            });
+        }
+
+        // Function to disable controls during sorting
+        function disableControls() {
+            generateArrayBtn.disabled = true;
+            startBubbleSortBtn.disabled = true;
+            startQuickSortBtn.disabled = true;
+            arraySizeSlider.disabled = true;
+            animationSpeedSlider.disabled = true;
+        }
+
+        // Function to enable controls after sorting
+        function enableControls() {
+            generateArrayBtn.disabled = false;
+            startBubbleSortBtn.disabled = false;
+            startQuickSortBtn.disabled = false;
+            arraySizeSlider.disabled = false;
+            animationSpeedSlider.disabled = false;
+        }
+
+        // Bubble Sort Algorithm
+        async function bubbleSort() {
+            if (isSorting) return;
+            isSorting = true;
+            disableControls();
+            resetBarColors();
+
+            const bars = document.querySelectorAll('.bar');
+            const n = array.length;
+
+            for (let i = 0; i < n - 1; i++) {
+                for (let j = 0; j < n - i - 1; j++) {
+                    bars[j].style.backgroundColor = '#ecc94b'; // Yellow for comparison
+                    bars[j + 1].style.backgroundColor = '#ecc94b';
+                    await sleep(animationDelay / 2);
+
+                    if (array[j] > array[j + 1]) {
+                        [array[j], array[j + 1]] = [array[j + 1], array[j]];
+                        await swapBars(bars[j], bars[j + 1]);
+                    } else {
+                        bars[j].style.backgroundColor = '#63b3ed';
+                        bars[j + 1].style.backgroundColor = '#63b3ed';
+                        await sleep(animationDelay / 2);
+                    }
+                    bars[j].style.backgroundColor = '#63b3ed';
+                    bars[j + 1].style.backgroundColor = '#63b3ed';
+                }
+                bars[n - 1 - i].style.backgroundColor = '#48bb78'; // Green for sorted
+            }
+            bars[0].style.backgroundColor = '#48bb78'; // Ensure the first element is also marked sorted
+
+            isSorting = false;
+            enableControls();
+        }
+
+        // Quick Sort Algorithm
+        async function quickSort(low, high) {
+            if (isSorting) return;
+            isSorting = true;
+            disableControls();
+            resetBarColors();
+            await _quickSort(0, array.length - 1);
+            isSorting = false;
+            enableControls();
+            // Mark all bars as sorted after completion
+            const bars = document.querySelectorAll('.bar');
+            for (let k = 0; k < bars.length; k++) {
+                bars[k].style.backgroundColor = '#48bb78'; // Green for sorted
+                await sleep(10); // Small delay to show final sorted state
+            }
+        }
+
+        async function _quickSort(low, high) {
+            if (low < high) {
+                const bars = document.querySelectorAll('.bar');
+                const pi = await partition(low, high, bars);
+
+                await _quickSort(low, pi - 1);
+                await _quickSort(pi + 1, high);
+            }
+        }
+
+        async function partition(low, high, bars) {
+            let pivot = array[high];
+            bars[high].style.backgroundColor = '#e53e3e'; // Red for pivot
+            await sleep(animationDelay);
+
+            let i = (low - 1); // Index of smaller element
+
+            for (let j = low; j <= high - 1; j++) {
+                bars[j].style.backgroundColor = '#ecc94b'; // Yellow for current element
+                await sleep(animationDelay / 2);
+
+                // If current element is smaller than or equal to pivot
+                if (array[j] <= pivot) {
+                    i++;
+                    // Swap array values
+                    [array[i], array[j]] = [array[j], array[i]];
+                    // Visually swap bars
+                    const tempBarHeight = bars[i].style.height;
+                    bars[i].style.height = bars[j].style.height;
+                    bars[j].style.height = tempBarHeight;
+
+                    // Highlight elements being swapped
+                    bars[i].style.backgroundColor = '#fc8181'; // Red for swap
+                    bars[j].style.backgroundColor = '#68d391'; // Green for swap
+                    await sleep(animationDelay);
+                    bars[i].style.backgroundColor = '#63b3ed';
+                    bars[j].style.backgroundColor = '#63b3ed';
+                }
+                bars[j].style.backgroundColor = '#63b3ed'; // Reset current element color
+            }
+
+            // Swap the pivot element with the element at i + 1
+            [array[i + 1], array[high]] = [array[high], array[i + 1]];
+            const tempBarHeight = bars[i + 1].style.height;
+            bars[i + 1].style.height = bars[high].style.height;
+            bars[high].style.height = tempBarHeight;
+
+            // Highlight pivot's final position
+            bars[i + 1].style.backgroundColor = '#48bb78'; // Green for sorted (pivot)
+            bars[high].style.backgroundColor = '#63b3ed'; // Reset original pivot position color
+            await sleep(animationDelay);
+            bars[high].style.backgroundColor = '#63b3ed';
+
+            return i + 1;
+        }
+
+
+        // Event Listeners
+        generateArrayBtn.addEventListener('click', () => {
+            resetBarColors(); // Ensure bars are blue before regenerating
+            generateArray();
+        });
+
+        startBubbleSortBtn.addEventListener('click', bubbleSort);
+
+        // Call quickSort with initial range (0 to array.length - 1)
+        startQuickSortBtn.addEventListener('click', () => {
+            resetBarColors(); // Ensure bars are blue before starting
+            // Call quickSort with initial parameters (low, high)
+            quickSort(0, array.length - 1);
+        });
+
+
+        arraySizeSlider.addEventListener('input', (e) => {
+            numBars = parseInt(e.target.value);
+            arraySizeValueSpan.textContent = numBars;
+            if (!isSorting) { // Only regenerate if not sorting
+                generateArray();
+            }
+        });
+
+        animationSpeedSlider.addEventListener('input', (e) => {
+            animationDelay = parseInt(e.target.value);
+            animationSpeedValueSpan.textContent = animationDelay;
+        });
+
+        // Initial array generation on page load
+        window.onload = generateArray;
+    </script>
+</body>
+
+</html>
