@@ -36,11 +36,9 @@ function sleep(ms) {
 
 async function bubblesort() {
     let bars = document.querySelectorAll(`.bar`);
-    // Outer loop for the number of passes
     for (let i = 0; i < bars.length - 1; i++) {
-        // Inner loop for comparisons in each pass
         for (let j = 0; j < bars.length - 1 - i; j++) {
-            bars[j].style.background = "#ecc94b"; // Color for comparison
+            bars[j].style.background = "#ecc94b";
             bars[j + 1].style.background = "#ecc94b";
             await sleep(delay);
 
@@ -52,15 +50,11 @@ async function bubblesort() {
                 const tempHeight = bars[j].style.height;
                 bars[j].style.height = bars[j + 1].style.height;
                 bars[j + 1].style.height = tempHeight;
-
                 await sleep(delay);
             }
-            // Reset colors after comparison/swap
             bars[j].style.background = "#63b3ed";
         }
-        // Mark the sorted element as green
         bars[bars.length - 1 - i].style.background = "#00ff4c";
     }
-    // Mark the final element as sorted
     bars[0].style.background = "#00ff4c";
 }

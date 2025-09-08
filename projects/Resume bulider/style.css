@@ -1,0 +1,7 @@
+@media print {
+    /* This rule targets only the print version of the page */
+    @page {
+        /* Set all margins to zero to remove the space where the browser puts headers/footers */
+        margin: 0;
+    }
+}
